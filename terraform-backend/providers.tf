@@ -1,0 +1,32 @@
+############################################
+# AWS Provider Configuration
+############################################
+provider "aws" {
+  region = var.shared_account.region
+
+  alias = "SHARED"
+
+  profile = var.shared_account.profile == "" ? null : var.shared_account.profile
+
+  dynamic "assume_role" {
+    for_each = [var.shared_account.assume_role_arn]
+    content {
+      role_arn = assume_role.value
+    }
+  }
+}
+
+provider "aws" {
+  region = var.target_account.region
+
+  alias = "TARGET"
+
+  profile = var.target_account.profile == "" ? null : var.target_account.profile
+
+  dynamic "assume_role" {
+    for_each = [var.target_account.assume_role_arn]
+    content {
+      role_arn = assume_role.value
+    }
+  }
+}
