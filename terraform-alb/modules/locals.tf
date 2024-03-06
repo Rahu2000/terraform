@@ -2,9 +2,9 @@ locals {
   IAM_POLICY_URL = "https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/main/docs/install/iam_policy.json"
   CRDS_URL       = "https://raw.githubusercontent.com/aws/eks-charts/master/stable/aws-load-balancer-controller/crds/crds.yaml"
 
-  service_account_policy_name = try(var.helm_release.service_account.iam.policy_name, format("%s-alb-controller-policy", var.cluster_name))
-  service_account_role_name   = try(var.helm_release.service_account.iam.role_name, format("%s-alb-controller-role", var.cluster_name))
-  service_account_name        = try(var.helm_release.service_account.name, format("%s-alb-controller-sa", var.cluster_name))
+  service_account_policy_name = coalesce(var.helm_release.service_account.iam.policy_name, format("%s-alb-controller-policy", var.cluster_name))
+  service_account_role_name   = coalesce(var.helm_release.service_account.iam.role_name, format("%s-alb-controller-role", var.cluster_name))
+  service_account_name        = coalesce(var.helm_release.service_account.name, format("%s-alb-controller-sa", var.cluster_name))
 
   values = templatefile("${path.root}/template/alb_values.tpl", {
     clusterName = var.cluster_name

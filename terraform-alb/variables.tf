@@ -117,20 +117,20 @@ variable "helm_release" {
 
 variable "shared_account" {
   type = object({
-    region          = string
+    region          = optional(string, "")
     profile         = optional(string, "")
     assume_role_arn = optional(string, "")
   })
-
+  default     = {}
   description = "default account"
 }
 
 variable "target_account" {
   type = object({
-    region          = string
+    region          = optional(string, "")
     profile         = optional(string, "")
     assume_role_arn = optional(string, "")
   })
-
+  default     = {}
   description = "target account"
 }
