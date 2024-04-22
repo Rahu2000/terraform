@@ -1,18 +1,18 @@
-kubeTargetVersionOverride: ${kube_version}
+kubeTargetVersionOverride: "${kube_version}"
 fullnameOverride: ${full_name}
 
 commonLabels:
-  tenant: ${org}
-  project: ${project}
-  env: ${env}
-  region: ${region}
+  tenant: "${org}"
+  project: "${project}"
+  env: "${env}"
+  region: "${region}"
 
 defaultRules:
   labels:
-    tenant: ${org}
-    project: ${project}
-    env: ${env}
-    region: ${region}
+    tenant: "${org}"
+    project: "${project}"
+    env: "${env}"
+    region: "${region}"
 
 %{ if additional_prometheus_rules != "" ~}
 additionalPrometheusRulesMap:
@@ -78,7 +78,7 @@ alertmanager:
 
 grafana:
   enabled: ${grafana_enabled}
-  adminPassword: ${grafana_admin_password}
+  adminPassword: "${grafana_admin_password}"
   defaultDashboardsTimezone: ${grafana_timezone}
 
 %{ if affinity != "" ~}
